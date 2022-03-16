@@ -10,6 +10,9 @@ import {
 import { Suspense } from "react"
 
 import "app/core/styles/index.css"
+import { TabContextProvider } from "app/core/components/Contexts/TabContext"
+import { SnackbarProvider } from "notistack"
+import Collapse from "@material-ui/core/Collapse"
 
 export default function App({ Component, pageProps }: AppProps) {
   const getLayout = Component.getLayout || ((page) => page)
@@ -19,7 +22,19 @@ export default function App({ Component, pageProps }: AppProps) {
       FallbackComponent={RootErrorFallback}
       onReset={useQueryErrorResetBoundary().reset}
     >
-      <Suspense fallback={<>Loading...</>}>{getLayout(<Component {...pageProps} />)}</Suspense>
+      <Suspense fallback={<>Loading...</>}>
+        <SnackbarProvider
+          maxSnack={3}
+          TransitionComponent={Collapse}
+          preventDuplicate={false}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "left",
+          }}
+        >
+          <TabContextProvider>{getLayout(<Component {...pageProps} />)}</TabContextProvider>
+        </SnackbarProvider>
+      </Suspense>
     </ErrorBoundary>
   )
 }
