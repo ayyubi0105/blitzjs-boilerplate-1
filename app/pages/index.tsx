@@ -5,8 +5,8 @@ const Home: BlitzPage = () => {
   const { memes, saveMeme, deleteMeme } = useMeme()
 
   return (
-    <div>
-      <div>
+    <div className="min-h-screen w-full bg-black">
+      {/* <div>
         {memes?.map((meme) => (
           <div className="mb-10 bg-gray-200" key={meme.id}>
             <h1 className="text-center text-xl">{meme.title}</h1>
@@ -22,7 +22,7 @@ const Home: BlitzPage = () => {
         ))}
       </div>
 
-      <pre>{JSON.stringify(memes, null, 2)}</pre>
+      <pre>{JSON.stringify(memes, null, 2)}</pre> */}
     </div>
   )
 }
